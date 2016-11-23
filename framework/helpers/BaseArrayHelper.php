@@ -215,6 +215,22 @@ class BaseArrayHelper
     }
 
     /**
+     * @param $array
+     * @param $value
+     * @param $key
+     * @return mixed
+     */
+    public static function setValue($array, $value, $key){
+        $key = is_array($key)?$key:explode(".", $key);
+        $tmp = &$array;
+        foreach ($key as $key){
+            $tmp = &$tmp[$key];
+        }
+        $tmp = $value;
+        unset($tmp);
+        return $array;
+    }
+    /**
      * Removes an item from an array and returns the value. If the key does not exist in the array, the default value
      * will be returned instead.
      *
